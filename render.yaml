@@ -1,0 +1,19 @@
+# Defines a single web service for your FastAPI application
+services:
+  - type: web
+    name: ai-debate-judge-scorer
+    # Use your GitHub repository URL
+    repo: https://github.com/Ankit9877/evaluating-debate
+    # Crucial: Must match the directory containing main.py
+    rootDir: debate_model_api
+    # Set the correct, stable Python version
+    env: python
+    pythonVersion: 3.11.0
+    plan: free
+    # Build command uses the standard environment interpreter
+    buildCommand: pip install -r requirements.txt
+    # Final fix: Use the Python module execution
+    startCommand: python -m uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PORT
+        value: "10000" # Necessary placeholder for the runtime
